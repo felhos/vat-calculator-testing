@@ -37,3 +37,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Other ###
+src/test/java/org/example/ExperimentingWithSeleniumTesting.java
