@@ -1,4 +1,4 @@
 package org.example.util;
 
-public record ResultSet(float netPrice, float vatValue, float grossPrice) {
+public record ResultSet(double netPrice, double vatValue, double grossPrice) {
 }
