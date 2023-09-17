@@ -1,6 +1,7 @@
 package org.example.pages;
 
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +14,6 @@ abstract class CalculatorPageBaseTest {
 
     @BeforeEach
     public void setUp() {
-        // Set up WebDriver
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.get("https://www.calkoo.com/en/vat-calculator");
@@ -21,4 +21,11 @@ abstract class CalculatorPageBaseTest {
         calculatorPage.acceptCookies();
     }
 
+    @AfterEach
+    public void tearDown() {
+        // Close the browser
+        if (driver != null) {
+            driver.quit();
+        }
+    }
 }
