@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.util.CustomExpectedConditions;
 import org.example.util.ResultSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,9 +32,22 @@ public class CalculatorPage {
     @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[10]/div[3]/input")
     private WebElement resetButton;
 
+
     public CalculatorPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    public WebElement getNetPriceInput() {
+        return netPriceInput;
+    }
+
+    public WebElement getVatSumInput() {
+        return vatSumInput;
+    }
+
+    public WebElement getGrossPriceInput() {
+        return grossPriceInput;
     }
 
     public String getSelectedCountry() {
@@ -61,7 +75,7 @@ public class CalculatorPage {
         String net = netPriceInput.getText();
         String vat = vatSumInput.getText();
         String gross = grossPriceInput.getText();
-        return new ResultSet(Double.parseDouble(net),Double.parseDouble(vat),Double.parseDouble(gross));
+        return new ResultSet(Double.parseDouble(net), Double.parseDouble(vat), Double.parseDouble(gross));
     }
 
     private WebElement waitForCookiePopup() {
@@ -73,4 +87,5 @@ public class CalculatorPage {
     public void acceptCookies() {
         waitForCookiePopup().click();
     }
+
 }
