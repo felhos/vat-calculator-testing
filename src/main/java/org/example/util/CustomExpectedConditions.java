@@ -9,7 +9,7 @@ public class CustomExpectedConditions {
         return new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver) {
-                String text = element.getText();
+                String text = element.getAttribute("value");
                 return !text.isEmpty();
             }
 
