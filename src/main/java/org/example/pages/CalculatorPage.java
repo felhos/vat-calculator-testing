@@ -72,9 +72,9 @@ public class CalculatorPage {
     }
 
     public ResultSet readResults() {
-        String net = netPriceInput.getText();
-        String vat = vatSumInput.getText();
-        String gross = grossPriceInput.getText();
+        String net = netPriceInput.getAttribute("value");
+        String vat = vatSumInput.getAttribute("value");
+        String gross = grossPriceInput.getAttribute("value");
         return new ResultSet(Double.parseDouble(net), Double.parseDouble(vat), Double.parseDouble(gross));
     }
 
