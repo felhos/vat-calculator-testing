@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class CalculatorPage {
@@ -59,5 +62,15 @@ public class CalculatorPage {
         String vat = vatSumInput.getText();
         String gross = grossPriceInput.getText();
         return new ResultSet(Double.parseDouble(net),Double.parseDouble(vat),Double.parseDouble(gross));
+    }
+
+    private WebElement waitForCookiePopup() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        By popupXPath = By.xpath("/html/body/div[5]/div[2]/div[1]/div[2]/div[2]/button[1]/p");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(popupXPath));
+    }
+
+    public void acceptCookies() {
+        waitForCookiePopup().click();
     }
 }
