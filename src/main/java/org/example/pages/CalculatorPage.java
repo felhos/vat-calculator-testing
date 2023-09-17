@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.example.util.ResultSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,8 @@ public class CalculatorPage {
     private WebElement grossPriceInput;
     @FindBy(id = "dropdownLanguages")
     private WebElement languagueSelector;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[10]/div[3]/input")
+    private WebElement resetButton;
 
     public CalculatorPage(WebDriver driver) {
         this.driver = driver;
@@ -33,5 +36,28 @@ public class CalculatorPage {
     public String getSelectedCountry() {
         WebElement selectedCountry = countrySelect.findElement(By.xpath(".//option[@selected='selected']"));
         return selectedCountry.getText();
+    }
+
+    public void InputNetPrice(double net) {
+        netPriceInput.sendKeys(String.valueOf(net));
+    }
+
+    public void InputVatSum(double vat) {
+        vatSumInput.sendKeys(String.valueOf(vat));
+    }
+
+    public void InputGrossPrice(double gross) {
+        grossPriceInput.sendKeys(String.valueOf(gross));
+    }
+
+    public void ResetPrices() {
+        resetButton.click();
+    }
+
+    public ResultSet readResults() {
+        String net = netPriceInput.getText();
+        String vat = vatSumInput.getText();
+        String gross = grossPriceInput.getText();
+        return new ResultSet(Double.parseDouble(net),Double.parseDouble(vat),Double.parseDouble(gross));
     }
 }
