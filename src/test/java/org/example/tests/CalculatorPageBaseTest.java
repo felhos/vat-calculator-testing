@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 abstract class CalculatorPageBaseTest {
     private String projectRoot = System.getProperty("user.dir");
     private String driverPath = projectRoot + "/src/main/resources/drivers/chromedriver.exe";
-    private WebDriver driver;
+    protected WebDriver driver;
     protected CalculatorPage calculatorPage;
 
     @BeforeEach

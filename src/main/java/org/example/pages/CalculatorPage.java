@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import org.example.util.CustomExpectedConditions;
 import org.example.util.ResultSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +18,7 @@ public class CalculatorPage {
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[2]/div[2]/select")
     private WebElement countrySelect;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[4]/div[2]")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[4]/div[2]/input[@type='radio']")
     private List<WebElement> vatOptions;
     @FindBy(id = "NetPrice")
     private WebElement netPriceInput;
@@ -54,9 +53,13 @@ public class CalculatorPage {
         return countrySelect;
     }
 
-    public String getSelectedCountry() {
+    public String getSelectedCountryName() {
         WebElement selectedCountry = countrySelect.findElement(By.xpath(".//option[@selected='selected']"));
         return selectedCountry.getText();
+    }
+
+    public List<WebElement> getVatOptions() {
+        return vatOptions;
     }
 
     public void InputNetPrice(double net) {
