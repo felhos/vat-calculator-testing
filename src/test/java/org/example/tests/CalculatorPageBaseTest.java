@@ -1,6 +1,7 @@
-package org.example.pages;
+package org.example.tests;
 
 
+import org.example.pages.CalculatorPage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +11,7 @@ abstract class CalculatorPageBaseTest {
     private String projectRoot = System.getProperty("user.dir");
     private String driverPath = projectRoot + "/src/main/resources/drivers/chromedriver.exe";
     private WebDriver driver;
-    private CalculatorPage calculatorPage;
+    protected CalculatorPage calculatorPage;
 
     @BeforeEach
     public void setUp() {
@@ -23,7 +24,6 @@ abstract class CalculatorPageBaseTest {
 
     @AfterEach
     public void tearDown() {
-        // Close the browser
         if (driver != null) {
             driver.quit();
         }

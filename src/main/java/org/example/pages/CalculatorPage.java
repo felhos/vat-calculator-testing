@@ -50,6 +50,10 @@ public class CalculatorPage {
         return grossPriceInput;
     }
 
+    public WebElement getCountrySelect() {
+        return countrySelect;
+    }
+
     public String getSelectedCountry() {
         WebElement selectedCountry = countrySelect.findElement(By.xpath(".//option[@selected='selected']"));
         return selectedCountry.getText();
