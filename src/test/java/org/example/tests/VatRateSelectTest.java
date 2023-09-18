@@ -14,6 +14,7 @@ import java.time.Duration;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VatRateSelectTest extends CalculatorPageBaseTest {
+    //User must be able to choose a valid VAT rate for the selected country
     private static final String DEFAULT_COUNTRY_CODE_FOR_VAT_TEST = "45";
 
     @BeforeEach

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CountrySelectTest extends CalculatorPageBaseTest {
+    //User must select a country which applies VAT scheme
     private Select countrySelect;
 
     @BeforeEach
