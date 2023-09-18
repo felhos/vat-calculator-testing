@@ -32,9 +32,8 @@ public class VatRateSelectTest extends CalculatorPageBaseTest {
     public void testVatRateSelection(String vatrate) {
         WebElement desiredRadioOption = calculatorPage.getVatOptions().stream()
                 .filter(we -> we.getAttribute("value").equals(vatrate)).findFirst().orElse(null);
-        System.out.println(desiredRadioOption.getAttribute("value"));
         //desiredRadioOption.click(); does not work, couldn't find the reason for it
-        //the following work around is not ideal
+        //the following work-around is not ideal
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", desiredRadioOption);
         assertTrue(desiredRadioOption.isSelected());
