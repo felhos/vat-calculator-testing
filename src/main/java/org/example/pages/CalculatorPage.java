@@ -1,6 +1,5 @@
 package org.example.pages;
 
-import org.example.util.CustomExpectedConditions;
 import org.example.util.ResultSet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +18,7 @@ public class CalculatorPage {
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[2]/div[2]/select")
     private WebElement countrySelect;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[4]/div[2]")
+    @FindBy(how = How.XPATH, using = "//*[@id=\"vatcalculator\"]/div[4]/div[2]/input[@type='radio']")
     private List<WebElement> vatOptions;
     @FindBy(id = "NetPrice")
     private WebElement netPriceInput;
@@ -50,24 +49,32 @@ public class CalculatorPage {
         return grossPriceInput;
     }
 
-    public String getSelectedCountry() {
+    public WebElement getCountrySelect() {
+        return countrySelect;
+    }
+
+    public String getSelectedCountryName() {
         WebElement selectedCountry = countrySelect.findElement(By.xpath(".//option[@selected='selected']"));
         return selectedCountry.getText();
     }
 
-    public void InputNetPrice(double net) {
-        netPriceInput.sendKeys(String.valueOf(net));
+    public List<WebElement> getVatOptions() {
+        return vatOptions;
     }
 
-    public void InputVatSum(double vat) {
-        vatSumInput.sendKeys(String.valueOf(vat));
+    public void inputNetPrice(String net) {
+        netPriceInput.sendKeys(net);
     }
 
-    public void InputGrossPrice(double gross) {
-        grossPriceInput.sendKeys(String.valueOf(gross));
+    public void inputVatSum(String vat) {
+        vatSumInput.sendKeys(vat);
     }
 
-    public void ResetPrices() {
+    public void inputGrossPrice(String gross) {
+        grossPriceInput.sendKeys(gross);
+    }
+
+    public void resetPrices() {
         resetButton.click();
     }
 
