@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CountrySelectTest extends CalculatorPageBaseTest {
     private Select countrySelect;
+
     @BeforeEach
     public void setUpCountrySelectTest() {
         countrySelect = new Select(calculatorPage.getCountrySelect());
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"Germany", "Afghanistan", "Thailand", "Kenya", "New Zealand"})
     public void testCountrySelection(String countryName) {

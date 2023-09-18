@@ -13,8 +13,9 @@ import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class VatRateSelectTest extends CalculatorPageBaseTest{
+public class VatRateSelectTest extends CalculatorPageBaseTest {
     private static final String DEFAULT_COUNTRY_CODE_FOR_VAT_TEST = "45";
+
     @BeforeEach
     public void selectCountryWithMultipleVatOptions() {
         //Somewhat arbitrary choice of Bangladesh, because it has many
@@ -22,14 +23,14 @@ public class VatRateSelectTest extends CalculatorPageBaseTest{
         Select countrySelect = new Select(calculatorPage.getCountrySelect());
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1));
         countrySelect.selectByValue(DEFAULT_COUNTRY_CODE_FOR_VAT_TEST);
-        wait.until(ExpectedConditions.attributeToBe(calculatorPage.getCountrySelect(),"value",DEFAULT_COUNTRY_CODE_FOR_VAT_TEST));
+        wait.until(ExpectedConditions.attributeToBe(calculatorPage.getCountrySelect(), "value", DEFAULT_COUNTRY_CODE_FOR_VAT_TEST));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"2.25", "7.5", "10", "15"})
     public void testVatRateSelection(String vatrate) {
         WebElement desiredRadioOption = calculatorPage.getVatOptions().stream()
-                .filter(we-> we.getAttribute("value").equals(vatrate)).findFirst().orElse(null);
+                .filter(we -> we.getAttribute("value").equals(vatrate)).findFirst().orElse(null);
         System.out.println(desiredRadioOption.getAttribute("value"));
         //desiredRadioOption.click(); does not work, couldn't find the reason for it
         //the following work around is not ideal
