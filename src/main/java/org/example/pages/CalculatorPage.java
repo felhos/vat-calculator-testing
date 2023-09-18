@@ -62,19 +62,19 @@ public class CalculatorPage {
         return vatOptions;
     }
 
-    public void InputNetPrice(double net) {
-        netPriceInput.sendKeys(String.valueOf(net));
+    public void inputNetPrice(String net) {
+        netPriceInput.sendKeys(net);
     }
 
-    public void InputVatSum(double vat) {
-        vatSumInput.sendKeys(String.valueOf(vat));
+    public void inputVatSum(String vat) {
+        vatSumInput.sendKeys(vat);
     }
 
-    public void InputGrossPrice(double gross) {
-        grossPriceInput.sendKeys(String.valueOf(gross));
+    public void inputGrossPrice(String gross) {
+        grossPriceInput.sendKeys(gross);
     }
 
-    public void ResetPrices() {
+    public void resetPrices() {
         resetButton.click();
     }
 
