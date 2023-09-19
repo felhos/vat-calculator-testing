@@ -1,6 +1,25 @@
 <a name="readme-top"></a>
 # Test documentation
 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#acceptance-criteria">Accepance criteria</a>
+    </li>
+    <li>
+      <a href="#bug-report">Bug report</a>
+      <ul>
+        <li><a href="#acceptance-criteria">Acceptance criteria</a></li>
+        <li><a href="#other-issues">Other issues</a></li>
+      </ul>
+    </li>
+    <li><a href="#limits-of-automation">Limits of automation</a></li>
+    <li><a href="#open-questions">Open questions</a></li>
+    <li><a href="#other-notes">Other notes</a></li>
+  </ol>
+</details>
+
 ## Acceptance criteria
 
 ### User can select countries
@@ -34,10 +53,18 @@ You cannot enter bigger numbers than 999,999,999, but in case one of the other f
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Open questions
-- Do negative inputs have to be treated as incorrect inputs? 
+- Do negative inputs have to be treated as incorrect inputs?
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Limits of automation
+The following test cases cannot be evaluated with automated tests alone and needs manual testing:
+- Examining the responsivity of the site, whether the layout breaks when displayed in lower resolution
+- Other visual glitches, like broken fonts or misaligned elements should be checked for manually as well
+- Testing the accessibility of the site. There are tools, that can help with it (e.g. checking that all interactible elements have labels, checking color contrasts), but evaluating the user experience needs manual testing
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Other notes
+
 - The tests were run only in Chrome on Windows 11 operating system. Should be tested with other browsers and OSes.
-- The project is not fully functional, there are issues in two tests, that I couldn't resolve 
+- The project is not fully functional, there are issues in two tests, that I couldn't resolve
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
