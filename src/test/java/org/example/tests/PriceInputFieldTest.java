@@ -6,6 +6,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,14 +26,13 @@ public class PriceInputFieldTest extends CalculatorPageBaseTest {
 
     @ParameterizedTest
     //F1,F2 and F3 are the ids of the radio select options for net, vat and gross respectively
-    @ValueSource(strings = {"F1", "F2", "F3"})
+    @ValueSource(strings = {"F1","F2","F3"})
     public void testInputIsEnabledAfterSelection(String idOfRadioSelect) {
-        WebElement button = driver.findElement(By.id("F1"));
+        WebElement button = driver.findElement(By.id(idOfRadioSelect));
+        System.out.println(button.getAttribute("id"));
         //click() still doesn't work, so the same JS solution is used as in VatRateSelectTest
-        //This workaround still doesn't work
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", button);
-        //I couldn't put non-static fields in a parameter stream
         WebElement chosenInputField = calculatorPage.getNetPriceInput();
         ;
         switch (idOfRadioSelect) {
@@ -50,7 +53,7 @@ public class PriceInputFieldTest extends CalculatorPageBaseTest {
     @ParameterizedTest
     @ValueSource(strings = {"F1", "F2", "F3"})
     public void testInputIsDisabledAfterSelectionOfOtherOption(String idOfRadioSelect) {
-        WebElement button = driver.findElement(By.id("F1"));
+        WebElement button = driver.findElement(By.id(idOfRadioSelect));
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", button);
         WebElement notChosenInputField1 = calculatorPage.getNetPriceInput();
