@@ -15,8 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PriceInputFieldTest extends CalculatorPageBaseTest {
     //One of the following amounts are supported as an input: Net/VAT/Gross
-    //This test class has failed test cases that are not due to the functionality
-    //of the site. I couldn't manage to properly select the input.
+
     @Test
     public void testIfInputsExist() {
         assertNotNull(calculatorPage.getNetPriceInput());
@@ -25,11 +24,12 @@ public class PriceInputFieldTest extends CalculatorPageBaseTest {
     }
 
     @ParameterizedTest
-    //F1,F2 and F3 are the ids of the radio select options for net, vat and gross respectively
+    //F1,F2 and F3 are the ids of the radio select options for net, vat and gross respectively.
+    //I cannot include non-static variables for parameters,
+    //so I solved it with a switch case, but it is not an optimal solution.
     @ValueSource(strings = {"F1","F2","F3"})
     public void testInputIsEnabledAfterSelection(String idOfRadioSelect) {
         WebElement button = driver.findElement(By.id(idOfRadioSelect));
-        System.out.println(button.getAttribute("id"));
         //click() still doesn't work, so the same JS solution is used as in VatRateSelectTest
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", button);

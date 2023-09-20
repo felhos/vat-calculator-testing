@@ -16,6 +16,6 @@ public class ReferenceCalculator {
     public static ResultSet calculateFromGross(double gross, double vatRate) {
         double net = gross / (1 + vatRate / 100);
         double vat = gross - net;
-        return null;
+        return new ResultSet(net, vat, gross);
     }
 }
