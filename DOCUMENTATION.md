@@ -27,11 +27,11 @@ Country selection works as intended.
 ### User can select VAT rate for the selected country
 VAT rate selection works as intended.
 ### One of the following amounts are supported as an input: Net/Gross/VAT
-Couldn't fully test it with automation, but manual testing shows it works as intended.
+Only the selected input can be changed, the others are disabled. The user can type in the disabled field temporarily, but it doesn't change its value.
 ### Amounts can be entered with maximum 2 decimal digit precision
 The results are rounded to maximum two decimal. The input however can include more as long as the total digits are less than 10 (including the decimal point). The input's decimals after the second does affect the calculation.
 ### Given all mandatory fields (country, vat rate, one of the amounts) are provided, the website will calculate and show the other 2 amounts which were not provided originally as an input value
-Couldn't fully test it with automation, but it works as intended as long as the input is not too big.
+The calculator works correctly as long as the results don't exceed 9 digits, in which case only the first 9 digits of the results are shown to the user.
 ### The API provides an error with meaningful error message, in case of negative input
 The site does the calculations normally with negative inputs. There is a visual component: a pie chart to show the share of net price and VAT, and that pie chart is missing with a proper error message, when the input is negative.
 [Note: calculating VAT on negative numbers can have meaningful use, as it occurs in accounting]
@@ -47,6 +47,7 @@ You cannot enter bigger numbers than 999,999,999, but in case one of the other f
 - Inputs can be given with higher precision than two decimals.
 ### Other issues
 - Non-numerical inputs can be given, if it doesn't start with a digit it shows NaN in the other field. If it starts with a digit it considers it a number (e.g. 123hf45k is considered 123 by the website).
+- When results go over the 9 digit limit, they are calculated correctly, but only the first 9 digit is shown to the user.
 - Croatian and Norwegian languages are able to be selected, but aren't available.
 - In the Czech version the font is broken. The text is still legible but looks unappealing.
 - The website's accessibility is poor for users with vision impairment or low vision (checked by  Chrome extensions axe DevTools - Web Accessibility Testing)
@@ -60,6 +61,7 @@ You cannot enter bigger numbers than 999,999,999, but in case one of the other f
 The following test cases cannot be evaluated with automated tests alone and needs manual testing:
 - Examining the responsivity of the site, whether the layout breaks when displayed in lower resolution
 - Other visual glitches, like broken fonts or misaligned elements should be checked for manually as well
+- Giving too big numbers as 'net price' or 'vat' can make the 'gross price' and/or the 'net price' go over the digit limit. In such cases the fields hold the correct value and the tests show no error, but only the first 9 digit of the result is displayed. This bugs fix will require manual testing as well.
 - Testing the accessibility of the site. There are tools, that can help with it (e.g. checking that all interactible elements have labels, checking color contrasts), but evaluating the user experience needs manual testing
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
