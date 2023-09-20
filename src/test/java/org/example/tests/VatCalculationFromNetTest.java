@@ -5,50 +5,28 @@ import org.example.util.ResultSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class VatCalculationTest extends CalculatorPageBaseTest{
+public class VatCalculationFromNetTest extends CalculatorPageBaseTest {
     /*Given all mandatory fields (country, vat rate, one of the amounts) are provided,
     the website will calculate and show the other 2 amounts which were not provided
     originally as an input value*/
-    /*I couldn't solve the selection of the input type, so this test class is incomplete.
-    It only tests the calculations with the default selection, which is net price.*/
     private double vatRate;
+
     @BeforeEach
     public void getVatRate() {
         WebElement selectedVatRateRadio = calculatorPage.getVatOptions().stream()
                 .filter(we -> we.isSelected()).findFirst().orElse(null);
         vatRate = Double.parseDouble(selectedVatRateRadio.getAttribute("value"));
     }
+
     @ParameterizedTest
     @ValueSource(strings = {"100", "7500", "12345"})
     public void testCalculationFromNetWithSmallNumbersFromNet(String netPrice) {
         calculatorPage.inputNetPrice(netPrice);
         ResultSet expected = ReferenceCalculator.calculateFromNet(Double.parseDouble(netPrice), vatRate);
-        ResultSet actual = calculatorPage.readResults();
-        assertEquals(expected, actual);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"100", "7500", "12345"})
-    public void testCalculationFromNetWithSmallNumbersFromVat(String vatSum) {
-        chooseVatInput();
-        calculatorPage.inputVatSum(vatSum);
-        ResultSet expected = ReferenceCalculator.calculateFromVat(Double.parseDouble(vatSum), vatRate);
-        ResultSet actual = calculatorPage.readResults();
-        assertEquals(expected, actual);
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"100", "7500", "12345"})
-    public void testCalculationFromNetWithSmallNumbersFromGross(String grossPrice) {
-        chooseGrossInput();
-        calculatorPage.inputGrossPrice(grossPrice);
-        ResultSet expected = ReferenceCalculator.calculateFromGross(Double.parseDouble(grossPrice), vatRate);
         ResultSet actual = calculatorPage.readResults();
         assertEquals(expected, actual);
     }
@@ -84,15 +62,4 @@ public class VatCalculationTest extends CalculatorPageBaseTest{
         assertEquals(expected, actual);
     }
 
-    private void chooseVatInput() {
-        WebElement button = driver.findElement(By.id("F2"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", button);
-    }
-
-    private void chooseGrossInput() {
-        WebElement button = driver.findElement(By.id("F3"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", button);
-    }
 }
