@@ -36,4 +36,31 @@ public class VatCalculationFromVatTest extends CalculatorPageBaseTest{
         ResultSet actual = calculatorPage.readResults();
         assertEquals(expected, actual);
     }
+    @ParameterizedTest
+    @ValueSource(strings = {"999999999", "897564231", "123456789"})
+    //the test shows no error, but numbers over 9 digits only show their first 9 digits
+    public void testCalculationFromNetWithBigNumbersFromNet(String vatSum) {
+        calculatorPage.inputVatSum(vatSum);
+        ResultSet expected = ReferenceCalculator.calculateFromVat(Double.parseDouble(vatSum), vatRate);
+        ResultSet actual = calculatorPage.readResults();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"-100", "-7500", "-123456789"})
+    public void testCalculationFromNetWithNegativeNumbersFromNet(String vatSum) {
+        calculatorPage.inputVatSum(vatSum);
+        ResultSet expected = ReferenceCalculator.calculateFromVat(Double.parseDouble(vatSum), vatRate);
+        ResultSet actual = calculatorPage.readResults();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"fifty", "10fe14", "m&ms"})
+    public void testCalculationFromNetWithNonnumericalInputFromNet(String vatSum) {
+        calculatorPage.inputVatSum(vatSum);
+        String expected = "NaN";
+        String actual = calculatorPage.getGrossPriceInput().getAttribute("value");
+        assertEquals(expected, actual);
+    }
 }
